@@ -95,3 +95,10 @@ credentials.md
 .idea
 secret.md
 
+script/create-user.py
+script/entrypoint.sh
+
+script/*
+
+
+
