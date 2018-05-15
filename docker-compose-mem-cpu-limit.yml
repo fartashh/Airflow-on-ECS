@@ -1,0 +1,72 @@
+version: '2'
+services:
+    webserver:
+        image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
+        cpu_shares: 50
+        mem_limit: 1048576000
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Celery
+            - CONFIG=PRODUCTION
+            - FERNET_KEY=bzSmA8ttBWWguJd-cfIYL7fN_v_9uRbf_MBUxYKML-U=
+        ports:
+            - "80:8080"
+        command: webserver
+        logging:
+          driver: awslogs
+          options:
+            awslogs-group: datalab-wfms
+            awslogs-region: us-east-1
+            awslogs-stream-prefix: datalab-wfms-webserver
+    flower:
+        image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
+        cpu_shares: 50
+        mem_limit: 1048576000
+        environment:
+            - EXECUTOR=Celery
+        ports:
+            - "5555:5555"
+        command: flower
+        logging:
+          driver: awslogs
+          options:
+            awslogs-group: datalab-wfms
+            awslogs-region: us-east-1
+            awslogs-stream-prefix: datalab-wfms-flower
+    scheduler:
+        image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
+        cpu_shares: 50
+        mem_limit: 1048576000
+        links:
+            - webserver
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Celery
+            - CONFIG=PRODUCTION
+            - FERNET_KEY=bzSmA8ttBWWguJd-cfIYL7fN_v_9uRbf_MBUxYKML-U=
+        command: scheduler
+        logging:
+          driver: awslogs
+          options:
+            awslogs-group: datalab-wfms
+            awslogs-region: us-east-1
+            awslogs-stream-prefix: datalab-wfms-scheduler
+    worker:
+        image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
+        cpu_shares: 50
+        mem_limit: 1048576000
+        links:
+            - scheduler
+        environment:
+            - LOAD_EX=n
+            - EXECUTOR=Celery
+            - CONFIG=PRODUCTION
+            - FERNET_KEY=bzSmA8ttBWWguJd-cfIYL7fN_v_9uRbf_MBUxYKML-U=
+        command: worker
+        logging:
+          driver: awslogs
+          options:
+            awslogs-group: datalab-wfms
+            awslogs-region: us-east-1
+            awslogs-stream-prefix: datalab-wfms-worker
+
