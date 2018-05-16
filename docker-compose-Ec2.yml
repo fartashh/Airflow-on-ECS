@@ -10,7 +10,7 @@ services:
             - CONFIG=PRODUCTION
             - FERNET_KEY=bzSmA8ttBWWguJd-cfIYL7fN_v_9uRbf_MBUxYKML-U=
         ports:
-            - "8080:8080"
+            - "80:8080"
         command: webserver
         logging:
           driver: awslogs
@@ -37,6 +37,8 @@ services:
         image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
         cpu_shares: 50
         mem_limit: 2048576000
+        links:
+            - webserver
         environment:
             - LOAD_EX=n
             - EXECUTOR=Celery
@@ -53,6 +55,8 @@ services:
         image: 883482367958.dkr.ecr.us-east-1.amazonaws.com/nationkey-airflow:pro
         cpu_shares: 50
         mem_limit: 2048576000
+        links:
+            - scheduler
         environment:
             - LOAD_EX=n
             - EXECUTOR=Celery
