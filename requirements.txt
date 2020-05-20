@@ -45,7 +45,7 @@ GitPython==2.1.8
 google-api-python-client==1.6.5
 gunicorn==19.7.1
 html5lib==1.0.1
-httplib2==0.10.3
+httplib2==0.18.0
 idna==2.6
 idna-ssl==1.0.0
 itsdangerous==0.24
