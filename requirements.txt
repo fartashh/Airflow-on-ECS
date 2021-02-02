@@ -9,7 +9,7 @@ attrs==17.4.0
 Babel==2.5.3
 bcrypt==3.1.4
 billiard==3.5.0.3
-bleach==2.1.2
+bleach==3.3.0
 boto==2.48.0
 boto3==1.6.3
 botocore==1.9.3
