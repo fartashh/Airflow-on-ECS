@@ -96,7 +96,7 @@ thrift==0.11.0
 tornado==4.5.3
 Unidecode==1.0.22
 uritemplate==3.0.0
-urllib3==1.22
+urllib3==1.26.5
 vine==1.1.4
 webencodings==0.5.1
 websocket-client==0.47.0
