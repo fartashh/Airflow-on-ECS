@@ -56,7 +56,7 @@ jsonschema==2.6.0
 kombu==4.1.0
 lockfile==0.12.2
 lxml==3.8.0
-Mako==1.0.7
+Mako==1.2.2
 mandrill==1.0.57
 Markdown==2.6.11
 MarkupSafe==1.0
